@@ -1,0 +1,11 @@
+vn\edu\crs\registrationservice\dto\RegistrationRequestDTO.class
+vn\edu\crs\registrationservice\controller\RegistrationController.class
+vn\edu\crs\registrationservice\service\RegistrationService.class
+vn\edu\crs\registrationservice\RegistrationServiceApplication.class
+vn\edu\crs\registrationservice\config\RestTemplateConfig.class
+vn\edu\crs\registrationservice\security\JwtAuthFilter.class
+vn\edu\crs\registrationservice\exception\GlobalExceptionHandler.class
+vn\edu\crs\registrationservice\client\CourseClient.class
+vn\edu\crs\registrationservice\config\SecurityConfig.class
+vn\edu\crs\registrationservice\repository\RegistrationRepository.class
+vn\edu\crs\registrationservice\entity\Registration.class
