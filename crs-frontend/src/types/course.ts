@@ -16,3 +16,16 @@ export interface PagedResponse<T> {
   number: number; // trang hien tai (bat dau tu 0)
   size: number;
 }
+
+// purpose: bo sung kieu du lieu rieng cho form, khac voi Course (Course co id, form thi khong bat buoc)
+export interface CourseFormValues {
+  tenMonHoc: string;
+  soTinChi: string; // dung string trong form de de kiem soat input rong, se parseInt khi gui di
+  soChoToiDa: string;
+}
+
+export const emptyCourseForm: CourseFormValues = {
+  tenMonHoc: '',
+  soTinChi: '',
+  soChoToiDa: '',
+};
