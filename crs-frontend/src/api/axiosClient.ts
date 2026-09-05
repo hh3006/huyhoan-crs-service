@@ -1,8 +1,6 @@
 // path: crs-frontend/src/api/axiosClient.ts
-// purpose: axios instance duy nhat cua frontend, tro ve api-gateway va tu dong dinh kem
-// Authorization header neu co token trong localStorage.
-// LUU Y: day la ban toi gian - Buoi 8 se bo sung Response Interceptor de tu dong
-// dang xuat khi gap loi 401 (token het han), khong can sua lai doan code duoi day.
+// purpose: THEM Response Interceptor xu ly 401 (token het han/khong hop le) -> tu dong dang xuat.
+// Phan Request Interceptor GIU NGUYEN tu Buoi 7, khong sua.
 import axios from 'axios';
 
 const axiosClient = axios.create({
@@ -12,6 +10,7 @@ const axiosClient = axios.create({
   },
 });
 
+// Request Interceptor - tu Buoi 7, giu nguyen
 axiosClient.interceptors.request.use((config) => {
   const token = localStorage.getItem('crs_token');
   if (token) {
@@ -19,5 +18,22 @@ axiosClient.interceptors.request.use((config) => {
   }
   return config;
 });
+
+// Response Interceptor - MOI o Buoi 8
+axiosClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (axios.isAxiosError(error) && error.response?.status === 401) {
+      localStorage.removeItem('crs_token');
+      localStorage.removeItem('crs_user');
+      // Dung window.location thay vi useNavigate() vi day la file thuan TypeScript,
+      // khong phai component - khong the dung React Hook o day
+      if (window.location.pathname !== '/login') {
+        window.location.href = '/login';
+      }
+    }
+    return Promise.reject(error);
+  }
+);
 
 export default axiosClient;
